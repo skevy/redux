@@ -18,7 +18,11 @@ export default function createConnectDecorator(React, Connector) {
             select={state => select(state, this.props)}
             actionCreators={actionCreators}
           >
-            {stuff => <DecoratedComponent {...stuff} {...this.props} />}
+            {stuff => (
+              <DecoratedComponent ref={(c) => {
+                this.innerComponent = c;
+              }} {...stuff} {...this.props} />
+            )}
           </Connector>
         );
       }
